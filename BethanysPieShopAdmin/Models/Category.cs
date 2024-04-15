@@ -6,6 +6,6 @@
         public string Name { get; set; } = string.Empty;
         public string? Description { get; set; }
         public DateTime? DateAdded { get; set; }
-        ICollection<Category>? Pies { get; set; }
+        public ICollection<Pie>? Pies { get; set; }
     }
 }

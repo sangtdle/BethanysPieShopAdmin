@@ -1,4 +1,5 @@
 using BethanysPieShopAdmin.Models;
+using BethanysPieShopAdmin.Models.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -6,10 +7,13 @@ var builder = WebApplication.CreateBuilder(args);
 // Add service to the container
 builder.Services.AddControllersWithViews();
 
-
 builder.Services.AddDbContext<BethanysPieShopDbContext>(options => {
     options.UseSqlServer(builder.Configuration.GetConnectionString("BethanysPieShopDbContextConnection"));
 });
+
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<IPieRepository, PieRepository>();
+builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 
 var app = builder.Build();
 
