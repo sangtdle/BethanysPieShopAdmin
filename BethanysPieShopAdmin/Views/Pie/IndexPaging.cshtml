@@ -1,15 +1,19 @@
-﻿@model IEnumerable<Pie>
+﻿@using BethanysPieShopAdmin.Utilities;
+
+@model PagedList<Pie>
+
 <h2>Pies</h2>
 <hr />
 
 @if (!Model.Any())
 {
-    <tr><td colspan="3" class="text-center">No pies at this point</td></tr>
+    <p>No results</p>
 }
 else
 {
     <table class="table table-condensed table-bordered">
         <tr>
+
             <th>
                 Id
             </th>
@@ -36,4 +40,23 @@ else
             </tr>
         }
     </table>
+
+
 }
+
+@{
+    var previousButtonDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextButtonDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+
+<a asp-action="IndexPaging" asp-route-pageNumber="@(Model.PageIndex - 1)" class="btn btn-default @previousButtonDisabled">
+    Previous
+</a>
+<a asp-action="IndexPaging" asp-route-pageNumber="@(Model.PageIndex + 1)" class="btn btn-default @nextButtonDisabled">
+    Next
+</a>
+
+
+<p>
+    <a class="btn btn-primary" asp-action="Add">Add new pie</a>
+</p>
